@@ -2,6 +2,7 @@ import uuid
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 # Create your models here.
@@ -29,3 +30,6 @@ class Application(models.Model):
     accepted = models.BooleanField(default=False)
     rejected = models.BooleanField(default=False)
     reasonRejected = models.TextField(null=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('application-detail', kwargs={'pk': self.pk})
